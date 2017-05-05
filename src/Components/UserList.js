@@ -10,9 +10,10 @@ function UserList(props) {
         return (
           <UserDetail
             user={user}
-            onSelect={() => {
-              console.log("Userwas clicked", user);
-              props.onUserSelect(user);
+            onSelect={props.onUserSelect}
+            onDelete={(event, user) => {
+              console.log(user);
+              props.onUserDelete(props.user);
             }}
             key={key} />
         );

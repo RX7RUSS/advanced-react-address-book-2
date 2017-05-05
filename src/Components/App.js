@@ -10,51 +10,88 @@ class App extends Component {
     super(props);
 
     this.state = {
-      selectedUserList: []
+      selectedUserList: [],
+      filteredUserList: []
     };
   }
 
-  getFilteredUserList() {
-
+  getFilteredUserList(value) {
+    const {selectedUserList} = this.state;
+    const filteredList = selectedUserList.filter((user) => user.firstName.indexOf(value) > -1);
+    this.setState({
+      ...this.state,
+      filteredUserList: filteredList
+    });
   }
 
-  handleSearchBarChange() {
-
+  handleSearchBarChange(event) {
+    this.getFilteredUserList(event.target.value);
   }
 
-  render() {
+  handleSelectUser(user) {
+    this.setState({
+      selectedUserList: [
+        ...this.state.selectedUserList,
+        user
+      ]
+    });
+  }
+
+  handleDeleteUser(selectedUser) {
+    const {selectedUserList} = this.state;
+    const filterSelectedUsers = selectedUserList.filter(user => user.id !== selectedUser.id);
+    this.setState({
+      ...this.state,
+      selectedUserList: filterSelectedUsers
+    });
+  }
+
+  render(props) {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <br />
-        <div>
-          <SearchBar />
+          <h2>ACA Advanced Address Book</h2>
         </div>
         <h2>
-          <hr />
-          Available users
+          Search users
           <hr />
         </h2>
-        <UserList users={this.props.users} onUserSelect={(selectedUser) => {
-          // console.log("User selected in app", selectedUser);
-          this.setState({
-            selectedUserList: [
-              ...this.state.selectedUserList,
-              selectedUser
-            ]
-          });
-        }} />
-
+        <div>
+          <SearchBar onSearchBarChange={event => this.handleSearchBarChange(event)} />
+        </div>
         <h2>
           <hr />
-          Selected users
-          </h2>
+          Available Users
+          <hr />
+        </h2>
+        <UserList users={this.props.users}
+          onUserDelete={user => this.handleDeleteUser(user)}
+          onUserSelect={(user) => this.handleSelectUser(user)}
+        />
+        <h2>
+          <hr />
+          Selected Users
+        </h2>
         <hr />
-        <UserList users={this.state.selectedUserList} onUserSelect={() => {}} />
-      </div>
+        {
+          this.state.selectedUserList.length ? <UserList users={this.state.selectedUserList}
+            onUserDelete={user => this.handleDeleteUser(user)}
+            onUserSelect={(user) => this.handleSelectUser(user)}
+          /> : <div />
+        }
+        <h2>
+          <hr />
+          Filtered Users
+        </h2>
+        <hr />
+        {
+          this.state.filteredUserList.length ? <UserList users={this.state.filteredUserList}
+            onUserDelete={user => this.handleDeleteUser(user)}
+            onUserSelect={(user) => this.handleSelectUser(user)}
+          /> : <div />
+        }
+        </div>
     );
   }
 }
