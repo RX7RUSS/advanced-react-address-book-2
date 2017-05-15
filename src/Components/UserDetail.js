@@ -5,19 +5,16 @@ function UserDetail(props) {
   return (
     <div>
       {props.user.firstName} {props.user.lastName}
-      <button onClick={props.onSelect}>
+      <button onClick={props.onClick}>
         Select
-      </button>
-      <button onClick={props.onDelete}>
-        Delete
       </button>
     </div>
   );
 }
 
 UserDetail.propTypes = {
-  onSelect: PropTypes.func.isRequired,
-  user: PropTypes.object.isRequired
+  onClick: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default UserDetail;

@@ -28,7 +28,8 @@ class App extends Component {
     this.getFilteredUserList(event.target.value);
   }
 
-  handleSelectUser(user) {
+  handleSelectUser = (user) => {
+    console.log(user);
     this.setState({
       selectedUserList: [
         ...this.state.selectedUserList,
@@ -37,16 +38,16 @@ class App extends Component {
     });
   }
 
-  handleDeleteUser(selectedUser) {
-    const {selectedUserList} = this.state;
-    const filterSelectedUsers = selectedUserList.filter(user => user.id !== selectedUser.id);
-    this.setState({
-      ...this.state,
-      selectedUserList: filterSelectedUsers
-    });
-  }
+  // handleDeleteUser(selectedUser) {
+  //   const {selectedUserList} = this.state;
+  //   const filterSelectedUsers = selectedUserList.filter(user => user.id !== selectedUser.id);
+  //   this.setState({
+  //     ...this.state,
+  //     selectedUserList: filterSelectedUsers
+  //   });
+  // }
 
-  render(props) {
+  render() {
     return (
       <div className="App">
         <div className="App-header">
@@ -66,8 +67,8 @@ class App extends Component {
           <hr />
         </h2>
         <UserList users={this.props.users}
-          onUserDelete={user => this.handleDeleteUser(user)}
-          onUserSelect={(user) => this.handleSelectUser(user)}
+          // onUserDelete={user => this.handleDeleteUser(user)}
+          onUserSelect={this.handleSelectUser}
         />
         <h2>
           <hr />
@@ -75,10 +76,12 @@ class App extends Component {
         </h2>
         <hr />
         {
-          this.state.selectedUserList.length ? <UserList users={this.state.selectedUserList}
-            onUserDelete={user => this.handleDeleteUser(user)}
+          // this.state.selectedUserList.length ?
+          <UserList users={this.state.selectedUserList}
+            // onUserDelete={user => this.handleDeleteUser(user)}
             onUserSelect={(user) => this.handleSelectUser(user)}
-          /> : <div />
+          />
+          // : <div users={this.props.users} />
         }
         <h2>
           <hr />
@@ -86,12 +89,12 @@ class App extends Component {
         </h2>
         <hr />
         {
-          this.state.filteredUserList.length ? <UserList users={this.state.filteredUserList}
-            onUserDelete={user => this.handleDeleteUser(user)}
+          <UserList users={this.state.filteredUserList}
+            // onUserDelete={user => this.handleDeleteUser(user)}
             onUserSelect={(user) => this.handleSelectUser(user)}
-          /> : <div />
+          />
         }
-        </div>
+      </div>
     );
   }
 }
