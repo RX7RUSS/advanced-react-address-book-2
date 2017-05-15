@@ -6,13 +6,13 @@ import PropTypes from "prop-types";
 function SearchBar(props) {
   return (
     <form>
-      <input type="text" name="query" onChange={(event) => props.onSearchBarChange(event)} />
+      <input type="text" name="query" onChange={props.onChange} />
     </form>
   );
 }
 
 SearchBar.propTypes = {
-  onSearchBarChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default SearchBar;

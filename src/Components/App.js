@@ -25,6 +25,7 @@ class App extends Component {
   }
 
   handleSearchBarChange(event) {
+    console.log(event.target.value)
     this.getFilteredUserList(event.target.value);
   }
 
@@ -59,7 +60,7 @@ class App extends Component {
           <hr />
         </h2>
         <div>
-          <SearchBar onSearchBarChange={event => this.handleSearchBarChange(event)} />
+          <SearchBar onChange={(event) => this.handleSearchBarChange(event)} />
         </div>
         <h2>
           <hr />
