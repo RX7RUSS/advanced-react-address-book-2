@@ -17,10 +17,10 @@ class UserList extends Component {
             <UserDetail
               user={user}
               onClick={() => this.props.onUserSelect(user)}
-              // onDelete={(event, user) => {
-              //   console.log(user);
-              //   props.onUserDelete(props.user);
-              // }}
+              onDelete={(event, user) => {
+                console.log(user);
+                props.onUserDelete(props.user);
+              }}
               key={key} />
           );
         })}

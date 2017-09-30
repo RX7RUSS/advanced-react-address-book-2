@@ -39,21 +39,21 @@ class App extends Component {
     });
   }
 
-  // handleDeleteUser(selectedUser) {
-  //   const {selectedUserList} = this.state;
-  //   const filterSelectedUsers = selectedUserList.filter(user => user.id !== selectedUser.id);
-  //   this.setState({
-  //     ...this.state,
-  //     selectedUserList: filterSelectedUsers
-  //   });
-  // }
+  handleDeleteUser(selectedUser) {
+    const {selectedUserList} = this.state;
+    const filterSelectedUsers = selectedUserList.filter(user => user.id !== selectedUser.id);
+    this.setState({
+      ...this.state,
+      selectedUserList: filterSelectedUsers
+    });
+  }
 
   render() {
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>ACA Advanced Address Book</h2>
+          <h2>ACA Advanced Address Book-2</h2>
         </div>
         <h2>
           Search users
@@ -79,10 +79,9 @@ class App extends Component {
         {
           // this.state.selectedUserList.length ?
           <UserList users={this.state.selectedUserList}
-            // onUserDelete={user => this.handleDeleteUser(user)}
+            onUserDelete={user => this.handleDeleteUser(user)}
             onUserSelect={(user) => this.handleSelectUser(user)}
           />
-          // : <div users={this.props.users} />
         }
         <h2>
           <hr />

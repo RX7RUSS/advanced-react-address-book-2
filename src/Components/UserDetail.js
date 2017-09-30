@@ -8,6 +8,9 @@ function UserDetail(props) {
       <button onClick={props.onClick}>
         Select
       </button>
+      <button onClick={props.onClick}>
+        Delete
+      </button>
     </div>
   );
 }
